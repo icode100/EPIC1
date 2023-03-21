@@ -1,0 +1,133 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "djangouserreg",
+    "dateExported": "2023-03-19T07:59:30.956Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "0ae1e091-3835-44b2-9c60-60fe0e5a5553",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "firstcheck",
+            "url": "http://127.0.0.1:8000/register/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-17T15:11:00.112Z",
+            "modified": "2023-03-17T15:43:25.710Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\",\n  \"name\":\"Ipsit Das\",\n  \"password\":\"Ipsitdas@01\",\n  \"password2\":\"Ipsitdas@01\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "50aa5f79-c85d-4e53-aeef-902e21c5f2e1",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "logincheck",
+            "url": "http://127.0.0.1:8000/login/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-03-18T06:34:20.860Z",
+            "modified": "2023-03-19T07:01:44.769Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\",\n  \"password\":\"Ipsitdas@1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8bc2bc0c-f97d-42c8-ad2f-ff18a1f597e8",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "profile",
+            "url": "http://127.0.0.1:8000/profile/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-03-18T09:15:00.833Z",
+            "modified": "2023-03-18T09:20:51.039Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MTMyMzg5LCJpYXQiOjE2NzkxMzExODksImp0aSI6IjdkZTY4YmQ4NWJlNDQ0M2NhZmE3ZGUyNjQ5OTYzYzgwIiwidXNlcl9pZCI6M30.oaxYt03oTtIh-j22YGaHgHwPT5LTVQ6r358BNTHVygk"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8ab6d7cc-76e7-4c00-a223-61c06491b47a",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "changepassword",
+            "url": "http://127.0.0.1:8000/changepassword/",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-03-18T10:12:26.252Z",
+            "modified": "2023-03-19T05:51:46.267Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MjA0NzMzLCJpYXQiOjE2NzkyMDM1MzMsImp0aSI6IjcxOTk0YmJhMzhkZTQ0MjI4NTk2MGQ0MmIwMDkyMWRlIiwidXNlcl9pZCI6M30.wlP8mkoOb2KLxZ8gj2uhviEitPBSePYW9XV9KdWOyc0"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\":\"Ipsitdas@1\",\n  \"password2\":\"Ipsitdas@1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f9cbfbac-21b5-42fc-9ce7-5bb7c3e9d776",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "sendresetpassword",
+            "url": "http://127.0.0.1:8000/sendresetpassword/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-03-19T05:24:52.945Z",
+            "modified": "2023-03-19T06:54:45.208Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e9516aa-723d-49f0-af6a-b757c8771803",
+            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "containerId": "",
+            "name": "resetpass",
+            "url": "http://127.0.0.1:8000/resetpassword/Mw/blb6h9-11d4768248ed8b5a4574b02a39c60fc6",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-03-19T06:53:54.431Z",
+            "modified": "2023-03-19T06:58:05.741Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\":\"Ipsitdas@1\",\n  \"password2\":\"Ipsitdas@1\"\n  \n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

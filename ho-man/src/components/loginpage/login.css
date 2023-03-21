@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+.h2{
+    font-family: 'Poppins', sans-serif;
+}
+.container0{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: url('https://th.bing.com/th/id/R.11b7f121c2991fd6e23a5acc4b186bac?rik=cwMmFKf6UHSXxg&riu=http%3a%2f%2fnitandhra.ac.in%2fmain%2fdownloads%2fCOLOR.PNG&ehk=xDYrOMssREZhPVRO9Ef52sQccqxr70gpiKk4LQpnliE%3d&risl=&pid=ImgRaw&r=0') no-repeat;
+    background-position: center;
+    background-size:contain;
+    height: 100vh;
+    width: 100vw;
+    overflow:scroll;
+}
+#loginform{
+    border: 2px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 50px;
+    height:50vh;
+    overflow:hidden;
+}
+#loginform1{
+    border: 2px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 50px;
+    height:70vh;
+    overflow:hidden;
+}
+#forgot{
+    text-decoration: none;
+    color: white;
+}
+#forgot:hover{
+    text-decoration: underline;
+    color: red;
+}
+#register{
+    text-decoration: none;
+    color: white;
+}
+#register:hover{
+    text-decoration: underline;
+    color: rgb(58, 130, 3);
+}
