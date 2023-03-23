@@ -1,42 +1,39 @@
 import React, { useEffect,useState } from "react";
 import "./login.css";
-import { Alert } from "bootstrap-4-react/lib/components";
+// import { Alert } from "bootstrap-4-react/lib/components";
 // import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../../services/userAuth";
 export default function Register(props) {
     useEffect(() => {
         document.title = "ho-man | Register";
       }, []);
-  const navigate = useNavigate();
+  const [server_error,setServerError] = useState();
+  // const navigate = useNavigate();
+  const [registerUser,{isLoading}] = useRegisterUserMutation()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cnfpassword, setCnfPassword] = useState("");
   const [name, setName] = useState("");
-  const [error,setError] = useState({
-    status:'false',
-    type:'',
-    msg:'',
-  })
-  const handleSubmit = (event) => {
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const actualData = {
-        name:data.get('name'),
         email:data.get('email'),
+        name:data.get('name'),
         password:data.get('password'),
-        passwordcnf:data.get('confirm password'),
+        password2:data.get('confirm password'),
     }
-    if(actualData.name && actualData.email && actualData.password && actualData.password === actualData.passwordcnf){
-      console.log(actualData);
-      document.getElementById('loginform');
-      setError({status:'false',msg:'login success',type:'success'})
-      navigate('/');
+    const res = await registerUser(actualData)
+    // console.log(res)
+    // console.log(actualData)
+    if(res.error){
+      console.log(res.error.data.errors)
+      setServerError(res.error.data.errors)
     }
-    else if(actualData.name && actualData.email && actualData.password && actualData.password !== actualData.passwordcnf) {
-      setError({status:'true',msg:'passwords do not match',type:'danger'})
-    }
-    else{
-        setError({status:'true',msg:'all fields are mandatory',type:'danger'})
+    if(res.data){
+      console.log(res.data)
     }
     
     
@@ -101,7 +98,6 @@ export default function Register(props) {
           </button>
           
         </form>
-        {error.status==="true"?<Alert danger>{error.msg}</Alert>:<></>}
       </div>
     </>
   );
