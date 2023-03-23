@@ -1,8 +1,10 @@
 import React, { useEffect,useState } from "react";
 import "./login.css";
-import { Alert } from "bootstrap-4-react/lib/components";
-// import axios from 'axios';
+import { Alert, CircularProgress } from '@mui/material';
+import { useLoginUserMutation } from "../../services/userAuth";
+import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { storeToken } from "../../services/localStorageService";
 export default function Login(props) {
   useEffect(() => {
     document.title = "ho-man | Login";
@@ -10,26 +12,25 @@ export default function Login(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error,setError] = useState({
-    status:'false',
-    type:'',
-    msg:'',
-  })
-  const handleSubmit = (event) => {
+  const [loginUser,{isLoading}] = useLoginUserMutation();
+  const [server_error,setServerError] = useState({});
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const actualData = {
       email:data.get('email'),
       password:data.get('password'),
     }
-    if(actualData.email && actualData.password){
-      console.log(actualData);
-      document.getElementById('loginform');
-      setError({status:'false',msg:'login success',type:'success'})
-      navigate('/home');
+    // console.log(actualData)
+    const res = await loginUser(actualData);
+    console.log(res)
+    if(res.error){
+      setServerError(res.error.data.errors)
     }
-    else{
-      setError({status:'true',msg:'all fields are mandatory',type:'warning'})
+    if(res.data){
+      console.log(res.data);
+      storeToken(res.data.token);
+      navigate('/home');
     }
     
   };
@@ -51,6 +52,7 @@ export default function Login(props) {
               onChange={(event) => setEmail(event.target.value)}
             />
             <label htmlFor="floatingInput">Email address</label>
+            {server_error.email ? <Typography style={{fontSize:12,color:'red',paddingLeft:10}}>{server_error.email[0]}</Typography> :""}
           </div>
           <div className="form-floating">
             <input
@@ -63,10 +65,14 @@ export default function Login(props) {
               onChange={(event) => setPassword(event.target.value)}
             />
             <label htmlFor="floatingPassword">Password</label>
+            {server_error.password ? <Typography style={{fontSize:12,color:'red',paddingLeft:10}}>{server_error.password[0]}</Typography> :""}
           </div>
-          <button className="btn btn-warning my-3" type="submit">
+          {/* <button className="btn btn-warning my-3" type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
-          </button>
+          </button> */}
+          {isLoading? <CircularProgress/>:<button className="btn btn-warning my-3" type="submit">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </button>}
           <p>
             <a
               id="forgot"
@@ -82,7 +88,7 @@ export default function Login(props) {
             </a>
           </p>
         </form>
-        {error.status==="true"?<Alert info>{error.msg}</Alert>:<></>}
+        {server_error.non_field_errors?<Alert severity="error">{server_error.non_field_errors[0]}</Alert>:""}
       </div>
     </>
   );

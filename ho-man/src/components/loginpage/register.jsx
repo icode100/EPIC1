@@ -2,7 +2,6 @@ import React, { useEffect,useState } from "react";
 import { Alert } from '@mui/material';
 import "./login.css";
 import { Typography } from "@mui/material";
-// import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "../../services/userAuth";
 export default function Register(props) {
