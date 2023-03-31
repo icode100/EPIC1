@@ -4,6 +4,11 @@ import "./login.css";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useRegisterUserMutation } from "../../services/userAuth";
+import {CircularProgress} from "@mui/material";
+
+
+
+
 export default function Register(props) {
     useEffect(() => {
         document.title = "ho-man | Register";
@@ -100,9 +105,12 @@ export default function Register(props) {
             <label htmlFor="floatingPassword 1">confirm password</label>
             {server_error.password ? <Typography style={{fontSize:12,color:'red',paddingLeft:10}}>{server_error.password2[0]}</Typography> :""}
           </div>
-          <button className="btn btn-warning my-3" type="submit">
+          {/* <button className="btn btn-warning my-3" type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
-          </button>
+          </button> */}
+          {isLoading? <CircularProgress/>:<button className="btn btn-warning my-3" type="submit">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </button>}
           
         </form>
         {server_error.non_field_errors?<Alert severity="error">{server_error.non_field_errors[0]}</Alert>:""}

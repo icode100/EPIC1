@@ -4,7 +4,14 @@ import { Alert, CircularProgress } from '@mui/material';
 import { useLoginUserMutation } from "../../services/userAuth";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { storeToken } from "../../services/localStorageService";
+import { storeToken,getToken } from "../../services/localStorageService";
+import { useDispatch } from "react-redux";
+import { setUserToken } from "../../features/authSlice";
+
+
+
+
+
 export default function Login(props) {
   useEffect(() => {
     document.title = "ho-man | Login";
@@ -14,6 +21,7 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [loginUser,{isLoading}] = useLoginUserMutation();
   const [server_error,setServerError] = useState({});
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,17 +31,23 @@ export default function Login(props) {
     }
     // console.log(actualData)
     const res = await loginUser(actualData);
-    console.log(res)
+    // console.log(res)
     if(res.error){
       setServerError(res.error.data.errors)
     }
     if(res.data){
-      console.log(res.data);
+      // console.log(res.data.userid);
       storeToken(res.data.token);
+      let {access_token} = getToken()
+      dispatch(setUserToken({access_token:access_token}))
       navigate('/home');
     }
     
   };
+  let {access_token} = getToken()
+  useEffect(()=>{
+    dispatch(setUserToken({access_token:access_token}))
+  },[access_token,dispatch])
   
 
   return (

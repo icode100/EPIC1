@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import Clock from "../clock/clock";
 import favicon from "./favicon.ico";
 import { NavLink } from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../services/localStorageService";
+import { useDispatch } from "react-redux";
+import { unsetUserToken } from "../../features/authSlice";
+
 export default function Navbar(props) {
   const [nlstate, setnlstate] = useState("");
   const [lstate, setlstate] = useState("");
   const [idcstate, setidcstate] = useState("");
-  const navigate = useNavigate()
-  const handleLogout = ()=>{
-      removeToken();
-      navigate('/');
-  }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(unsetUserToken({ access_token: null }));
+    removeToken();
+    navigate("/");
+  };
   function isActiveFunc(match, location) {
     if (match) {
       setnlstate("");
@@ -100,9 +105,14 @@ export default function Navbar(props) {
               </NavLink>
             </li>
           </ul>
-          <Button variant="contained" href="#contained-buttons" style={{marginRight:'20px'}} onClick={handleLogout}>
-  <LogoutIcon/>
-</Button>
+          <Button
+            variant="contained"
+            href="#contained-buttons"
+            style={{ marginRight: "20px" }}
+            onClick={handleLogout}
+          >
+            Logout<LogoutIcon />
+          </Button>
           <Clock />
         </div>
       </div>
