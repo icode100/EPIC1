@@ -8,8 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { removeToken } from "../../services/localStorageService";
 import { useDispatch } from "react-redux";
 import { unsetUserToken } from "../../features/authSlice";
+import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
 
 export default function Navbar(props) {
+  
+  
+
   const [nlstate, setnlstate] = useState("");
   const [lstate, setlstate] = useState("");
   const [idcstate, setidcstate] = useState("");
@@ -20,6 +24,9 @@ export default function Navbar(props) {
     removeToken();
     navigate("/");
   };
+  const handleChangePass = ()=>{
+    navigate("/resetpass");
+  }
   function isActiveFunc(match, location) {
     if (match) {
       setnlstate("");
@@ -105,6 +112,15 @@ export default function Navbar(props) {
               </NavLink>
             </li>
           </ul>
+          <Button
+            variant="contained"
+            href="#contained-buttons"
+            style={{ marginRight: "20px" }}
+            onClick={handleChangePass}
+          >
+            Change password<LockResetOutlinedIcon />
+          </Button>
+
           <Button
             variant="contained"
             href="#contained-buttons"

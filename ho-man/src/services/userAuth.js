@@ -30,6 +30,20 @@ export const  UserAuthApi = createApi({
                 }
             }
         }),
+        passwordChange: builder.mutation({
+            query:({actualData,access_token})=>{
+                console.log(actualData)
+                console.log(access_token)
+                return {
+                    url:'changepassword/',
+                    method:'POST',
+                    body: actualData,
+                    headers:{
+                        'authorization':`Bearer ${access_token}`
+                    }
+                }
+            }
+        }),
         getLoggedUser: builder.query({
             query:(access_token)=>{
                 return {
@@ -45,4 +59,4 @@ export const  UserAuthApi = createApi({
   })
 
 
-export const { useRegisterUserMutation,useLoginUserMutation,useGetLoggedUserQuery} = UserAuthApi
+export const { useRegisterUserMutation,useLoginUserMutation,useGetLoggedUserQuery,usePasswordChangeMutation} = UserAuthApi

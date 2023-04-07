@@ -81,9 +81,7 @@ export default function Login(props) {
             <label htmlFor="floatingPassword">Password</label>
             {server_error.password ? <Typography style={{fontSize:12,color:'red',paddingLeft:10}}>{server_error.password[0]}</Typography> :""}
           </div>
-          {/* <button className="btn btn-warning my-3" type="submit">
-            <ion-icon name="log-in-outline"></ion-icon>
-          </button> */}
+          
           {isLoading? <CircularProgress/>:<button className="btn btn-warning my-3" type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
           </button>}
