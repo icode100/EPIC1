@@ -1,5 +1,5 @@
 from django.contrib import admin
-from auth_api.models import User
+from auth_api.models import User,userCred
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
@@ -24,3 +24,4 @@ class UserModelAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserModelAdmin)
+admin.site.register(userCred)

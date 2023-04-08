@@ -12,6 +12,7 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
+            id = str(email).split('@')[0],
             name=name,
         )
 
@@ -32,10 +33,27 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class userCred(models.Model):
+    reg = models.CharField(max_length=15,default="",null=False,primary_key=True)
+    dob = models.DateField(verbose_name='DOB',null=False)
+    course = models.CharField(max_length=15,null=False)
+    branch = models.CharField(max_length=15,default="",null=False)
+    hosteller = models.BooleanField(default=True,null=False)
+    blockName = models.CharField(max_length=15,default="")
+    roomno = models.CharField(max_length=15,default="")
+    def __str__(self):
+        return self.reg
 
 class User(AbstractBaseUser):
+    def __getitem__(self,index):
+        if isinstance(index, slice):
+            return self.email[index.start:index.stop:index.step]
+        else:
+            return self.email[index]
     email = models.EmailField(verbose_name='Email',
                               max_length=255, unique=True,)
+    id = models.CharField(verbose_name='ID',max_length=6,unique=True,primary_key=True)
+    cred = models.ForeignKey(userCred,null=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -46,6 +64,10 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.id = str(self.email).split('@')[0]
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.email
@@ -65,3 +87,4 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
