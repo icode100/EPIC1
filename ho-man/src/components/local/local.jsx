@@ -1,11 +1,16 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import profpic from "../nonlocal/profpic.png";
+import { getToken } from "../../services/localStorageService";
+import { useGetLoggedUserQuery } from "../../services/userAuth";
+
 export default function Local(props) {
   useEffect(() => {
     document.title = "ho-man | local outing";
   }, []);
-  return (
 
+  const {access_token} = getToken()
+  const {data,isSuccess} = useGetLoggedUserQuery(access_token);
+  return (
     <div className="container my-3">
       <section
         className="cred"
@@ -23,12 +28,12 @@ export default function Local(props) {
               class="card-text"
               style={{ fontWeight: "bold", fontFamily: "monospace" }}
             >
-              Name:{props.name} <br />
-              Roll:{props.roll} <br />
-              Branch:{props.branch} <br />
-              Sem:{props.sem} <br />
-              Block:{props.block} <br />
-              Room:{props.room} <br />
+              Name:{isSuccess && data ? data.name : ""} <br />
+              Roll:{isSuccess && data ? data.id : ""} <br />
+              Branch:{isSuccess && data ? data.cred.branch : ""} <br />
+              Sem:{isSuccess && data ? data.cred.sem : ""} <br />
+              Block:{isSuccess && data ? data.cred.blockName : ""} <br />
+              Room:{isSuccess && data ? data.cred.roomno : ""} <br />
               departing time:{new Date().toLocaleTimeString()}
             </p>
             <button type="submit" href="#" className="btn btn-info">

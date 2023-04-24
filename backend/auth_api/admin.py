@@ -30,7 +30,7 @@ class UserModelAdmin(BaseUserAdmin):
     filter_horizontal = ()
     form = CustomUserForm
 class userModelCred(admin.ModelAdmin):
-    list_display = ('reg','dob','course','branch','hosteller','blockName','roomno')
+    list_display = ('reg','dob','course','branch','sem','hosteller','blockName','roomno')
     ordering = ('reg',)
 
 

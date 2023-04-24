@@ -1,7 +1,13 @@
 import React,{useState,useEffect} from "react";
 import profpic from './profpic.png'
+import { getToken } from "../../services/localStorageService";
+import { useGetLoggedUserQuery } from "../../services/userAuth";
+
+
+
 export default function Nonlocal(props) {
-  
+  const {access_token} = getToken()
+  const {data,isSuccess} = useGetLoggedUserQuery(access_token);
   useEffect(() => {
     document.title = "ho-man | non-local outing";
   }, []);
@@ -63,12 +69,12 @@ export default function Nonlocal(props) {
                 <img src={profpic} class="card-img-top" alt="..."/>
                 <div class="card-body">
                     <p class="card-text" style={{fontWeight:'bold',fontFamily:'monospace'}}>
-                        Name:{props.name} <br />
-                        Roll:{props.roll} <br />
-                        Branch:{props.branch} <br />
-                        Sem:{props.sem} <br />
-                        Block:{props.block} <br />
-                        Room:{props.room} <br />
+                        Name:{isSuccess && data? data.name:""} <br />
+                        Roll:{isSuccess && data? data.id:""} <br />
+                        Branch:{isSuccess && data? data.cred.branch:""} <br />
+                        Sem:{isSuccess && data? data.cred.sem:""} <br />
+                        Block:{isSuccess && data? data.cred.blockName:""} <br />
+                        Room:{isSuccess && data? data.cred.roomno:""} <br />
                     </p>
                 </div>
             </div>

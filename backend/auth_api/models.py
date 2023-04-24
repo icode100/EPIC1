@@ -40,6 +40,7 @@ class userCred(models.Model):
     dob = models.DateField(verbose_name='DOB',null=False)
     course = models.CharField(max_length=15,null=False)
     branch = models.CharField(max_length=15,default="",null=False)
+    sem = models.CharField(max_length=5,default="",null=False)
     hosteller = models.BooleanField(default=True,null=False)
     blockName = models.CharField(max_length=15,default="")
     roomno = models.CharField(max_length=15,default="")
