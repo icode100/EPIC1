@@ -6,14 +6,16 @@ from auth_api.serializers import (UserRegSerializer,
                                   UserProfileSerializer,
                                   UserChangePasswordSerializer,
                                   SendPasswordResetEmailSerializer,
-                                  UserPasswordResetSerializer)
+                                  UserPasswordResetSerializer,
+                                  LocalOutingSerializer,
+                                  NonLocalOutingSerializer)
 from django.contrib.auth import authenticate
 from auth_api.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+
+
 # generating tokens
-
-
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -48,9 +50,10 @@ class UserLoginView(APIView):
         if user is not None:
             token = get_tokens_for_user(user)
             temp = "success"
-            userid = list(str(user).split('@'))[0]
-            type = list(list(str(user).split('@'))[1].split('.'))[0]
-            return Response({"status": temp, "token": token, "userid": userid, "type": type}, status=status.HTTP_200_OK)
+            print(user)
+            # userid = list(str(user).split('@'))[0]
+            # type = list(list(str(user).split('@'))[1].split('.'))[0]
+            return Response({"status": temp, "token": token}, status=status.HTTP_200_OK)
         # do not forget to twitch here in order to send the user cred for retriving data from main database
         # though u can also get the user data from the generated token
         # use the id as a foreign key and fetch the data from the other table
@@ -95,3 +98,21 @@ class UserPasswordResetView(APIView):
             data=request.data, context={'uid': uid, 'token': token})
         serializer.is_valid(raise_exception=True)
         return Response({"msg": "password reset successfully"}, status=status.HTTP_200_OK)
+class LocalOutingView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    def post(self,request,format=None):
+        serializer = LocalOutingSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class NonLocalOutingView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    def post(self,request,fromat=None):
+        serializer = NonLocalOutingSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status = status.HTTP_201_CREATED)

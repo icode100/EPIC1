@@ -53,8 +53,7 @@ class User(AbstractBaseUser):
             return self.email[index.start:index.stop:index.step]
         else:
             return self.email[index]
-    email = models.EmailField(verbose_name='Email',
-                              max_length=255, unique=True,)
+    email = models.EmailField(verbose_name='Email',max_length=255, unique=True,)
     id = models.CharField(verbose_name='ID',max_length=6,unique=True,primary_key=True)
     cred = models.ForeignKey(userCred,null=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
@@ -73,7 +72,7 @@ class User(AbstractBaseUser):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.email
+        return self.id
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -91,3 +90,21 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+class LocalOuting(models.Model):
+    outdate = models.DateField(auto_now=True)
+    outinstance = models.TimeField(auto_now=True)
+    ininstance = models.TimeField(null=True)
+    stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
+    security_ispermitted = models.BooleanField(default=False)
+class NonLocalOuting(models.Model):
+    stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
+    outinstance = models.DateTimeField()
+    ininstance = models.DateTimeField(null=True)
+    address = models.CharField(max_length=200)
+    reason = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    zip = models.IntegerField()
+    modeoft = models.CharField(max_length=20,default="")
+    security_ispermitted = models.BooleanField(default=False)
+    warden_ispermitted = models.BooleanField(default=False)

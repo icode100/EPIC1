@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from auth_api.models import User,userCred
+from auth_api.models import User,userCred,NonLocalOuting,LocalOuting
 from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -127,6 +127,13 @@ class UserPasswordResetSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
         return attrs
-
+class LocalOutingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalOuting
+        fields = ['ininstance','stu']
+class NonLocalOutingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NonLocalOuting
+        fields = ['stu','outinstance','address','reason','city','state','zip']
 
 

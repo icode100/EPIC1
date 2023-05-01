@@ -128,14 +128,20 @@ export default function Nonlocal(props) {
           <input type="text" className="form-control" id="inputZip" />
         </div>
         <div className="col-md-2">
+          <label HTMLfor="inputZip" className="form-label">
+            mode of transport
+          </label>
+          <input type="text" className="form-control" id="inputZip" />
+        </div>
+        <div className="col-md-2">
           <label HTMLfor="retdate" className="form-label">
-            Return date
+            Expected Return date
           </label>
           <input type='datetime-local' value={endDate} onChange={handleEndDateChange} className="form-control" id="retdate" />
         </div>
         <p>
           <button class="btn btn-primary my-2" type="button" onClick={calculateDateDifference} data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-            Display rebate
+            Display expected rebate
           </button>
         </p>
         <div style={{ minHeight:"120px"}}>
