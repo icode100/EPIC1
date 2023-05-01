@@ -54,9 +54,37 @@ export const  UserAuthApi = createApi({
                     }
                 }
             }
+        }),
+        postLocalOutingForm: builder.mutation({
+            query:({actualData,access_token})=>{
+                console.log(actualData)
+                console.log(access_token)
+                return {
+                    url:'localouting',
+                    method:'POST',
+                    body: actualData,
+                    headers:{
+                        'authorization':`Bearer ${access_token}`
+                    }
+                }
+            }
+        }),
+        postNonLocalOutingForm: builder.mutation({
+            query:({actualData,access_token})=>{
+                console.log(actualData)
+                console.log(access_token)
+                return {
+                    url:'nonlocalouting',
+                    method:'POST',
+                    body: actualData,
+                    headers:{
+                        'authorization':`Bearer ${access_token}`
+                    }
+                }
+            }
         })
     }),
   })
 
 
-export const { useRegisterUserMutation,useLoginUserMutation,useGetLoggedUserQuery,usePasswordChangeMutation} = UserAuthApi
+export const { useRegisterUserMutation,useLoginUserMutation,useGetLoggedUserQuery,usePasswordChangeMutation,usePostLocalOutingFormMutation,usePostNonLocalOutingFormMutation} = UserAuthApi

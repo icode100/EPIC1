@@ -93,13 +93,13 @@ class User(AbstractBaseUser):
 class LocalOuting(models.Model):
     outdate = models.DateField(auto_now=True)
     outinstance = models.TimeField(auto_now=True)
-    ininstance = models.TimeField(null=True)
+    ininstance = models.TimeField(null=True,blank=True)
     stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     security_ispermitted = models.BooleanField(default=False)
 class NonLocalOuting(models.Model):
     stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     outinstance = models.DateTimeField()
-    ininstance = models.DateTimeField(null=True)
+    ininstance = models.DateTimeField(null=True,blank=True)
     address = models.CharField(max_length=200)
     reason = models.CharField(max_length=200)
     city = models.CharField(max_length=200)

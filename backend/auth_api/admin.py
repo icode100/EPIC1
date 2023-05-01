@@ -10,16 +10,15 @@ class CustomUserForm(forms.ModelForm):
         model = User
         fields = '__all__'
 class CustomLocalOutingForm(forms.ModelForm):
-    another_model = forms.ModelChoiceField(queryset=User.objects.all())
-
     class Meta:
         model = LocalOuting
         fields = '__all__'
-class customNonLocalOutingForm(forms.ModelForm):
-    another_model = forms.ModelChoiceField(queryset=User.objects.all())
+        
+class CustomNonLocalOutingForm(forms.ModelForm):
     class Meta:
         model = NonLocalOuting
         fields = '__all__'
+        
 class UserModelAdmin(BaseUserAdmin):
     list_display = ('id', 'email', 'name', 'is_admin','cred')
     list_filter = ('is_admin',)
@@ -46,8 +45,10 @@ class userModelCred(admin.ModelAdmin):
 
 class LocalOutingModelAdmin(admin.ModelAdmin):
     list_display = ('stu','outdate','outinstance','ininstance','security_ispermitted')
+    form  = CustomLocalOutingForm
 class NonLocalOutingModelAdmin(admin.ModelAdmin):
     list_display = ('stu','outinstance','ininstance','reason','zip','security_ispermitted','warden_ispermitted')
+    form = CustomNonLocalOutingForm
 admin.site.register(User, UserModelAdmin)
 admin.site.register(userCred,userModelCred)
 admin.site.register(LocalOuting,LocalOutingModelAdmin)

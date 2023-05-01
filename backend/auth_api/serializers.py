@@ -134,4 +134,4 @@ class LocalOutingSerializer(serializers.ModelSerializer):
 class NonLocalOutingSerializer(serializers.ModelSerializer):
     class Meta:
         model = NonLocalOuting
-        fields = ['stu','outinstance','address','reason','city','state','zip']
+        fields = ['stu','outinstance','address','reason','city','state','zip','modeoft']

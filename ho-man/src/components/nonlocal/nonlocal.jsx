@@ -2,7 +2,10 @@ import React,{useState,useEffect} from "react";
 import profpic from './profpic.png'
 import { getToken } from "../../services/localStorageService";
 import { useGetLoggedUserQuery } from "../../services/userAuth";
-
+import { usePostNonLocalOutingFormMutation } from "../../services/userAuth";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import PublishSharpIcon from '@mui/icons-material/PublishSharp';
 
 
 export default function Nonlocal(props) {
@@ -50,10 +53,40 @@ export default function Nonlocal(props) {
     'West Bengal'
   ];
   const [endDate, setEndDate] = useState('');
+  const [outDate, setOutDate] = useState('');
+  const navigate = useNavigate();
   const [dateDifference, setDateDifference] = useState(null);
   const handleEndDateChange = (e) => {
     setEndDate(e.target.value);
   };
+  const handleOutDateChange = (e) => {
+    setOutDate(e.target.value);
+  };
+  const [nonlocalsubmit,{isLoading}] = usePostNonLocalOutingFormMutation();
+  const HandleSubmit = async(event)=>{
+    event.preventDefault();
+    const formdata = new FormData(event.currentTarget);
+    const actualData = 
+    {
+      stu:data.id,
+      outinstance:formdata.get('outdate'),
+      address:formdata.get('address'),
+      reason:formdata.get('reason'),
+      city:formdata.get('city'),
+      state:formdata.get('state'),
+      zip:parseInt(formdata.get('zip')),
+      modeoft:formdata.get('modeoft')
+    }
+    console.log(actualData);
+    const res = await nonlocalsubmit({actualData,access_token})
+    if(res.error){
+      alert("Sorry! 😢 we cannot process your request now. Please contact the admin");
+    }
+    if(res.data){
+      navigate('/home');
+    }
+
+  }
   const calculateDateDifference = () => {
     const start = new Date();
     const end = new Date(endDate);
@@ -79,7 +112,7 @@ export default function Nonlocal(props) {
                 </div>
             </div>
         </section>
-      <form className="row">
+      <form className="row" onSubmit={HandleSubmit}>
         <div className="col-md-12">
           <label HTMLfor="inputAddress" className="form-label">
             Address
@@ -88,6 +121,7 @@ export default function Nonlocal(props) {
             type="text"
             className="form-control"
             id="inputAddress"
+            name="address"
             placeholder="1234 Main St"
           />
         </div>
@@ -98,6 +132,7 @@ export default function Nonlocal(props) {
           <input
             type="text"
             className="form-control"
+            name="reason"
             id="reason"
             placeholder="Reason!!!"
           />
@@ -106,13 +141,13 @@ export default function Nonlocal(props) {
           <label HTMLfor="inputCity" className="form-label">
             City
           </label>
-          <input type="text" className="form-control" id="inputCity" />
+          <input type="text" className="form-control" name="city" id="inputCity" />
         </div>
         <div className="col-md-4">
           <label HTMLfor="inputState" className="form-label">
             State
           </label>
-          <select id="inputState" className="form-select">
+          <select id="inputState" name="state" className="form-select">
             <option selected>Choose...</option>
             {states.map((item) => (
               <option key={item} value={item}>
@@ -125,13 +160,19 @@ export default function Nonlocal(props) {
           <label HTMLfor="inputZip" className="form-label">
             Zip
           </label>
-          <input type="text" className="form-control" id="inputZip" />
+          <input type="text" className="form-control" name="zip" id="inputZip" />
         </div>
         <div className="col-md-2">
-          <label HTMLfor="inputZip" className="form-label">
+          <label HTMLfor="inputZip"  className="form-label">
             mode of transport
           </label>
-          <input type="text" className="form-control" id="inputZip" />
+          <input type="text" name='modeoft' className="form-control" id="inputZip" />
+        </div>
+        <div className="col-md-2">
+          <label HTMLfor="outdate" className="form-label">
+            Outing date
+          </label>
+          <input type='datetime-local' value={outDate} onChange={handleOutDateChange} className="form-control" name="outdate" id="outdate" />
         </div>
         <div className="col-md-2">
           <label HTMLfor="retdate" className="form-label">
@@ -165,9 +206,9 @@ export default function Nonlocal(props) {
           </div>
         </div>
         <div className="col-12">
-          <button type="submit" className="btn btn-success">
-            Submit
-          </button>
+        {isLoading? <CircularProgress/>:<button className="btn btn-success my-3" type="submit">
+            <PublishSharpIcon/>
+          </button>}
         </div>
       </form>
     </div>
