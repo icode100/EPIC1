@@ -5,11 +5,10 @@ import { NavLink } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { removeToken } from "../../services/localStorageService";
+import { getOutdate, removeToken } from "../../services/localStorageService";
 import { useDispatch } from "react-redux";
 import { unsetUserToken } from "../../features/authSlice";
 import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
-
 export default function Navbar(props) {
   
   
@@ -32,7 +31,7 @@ export default function Navbar(props) {
       setnlstate("");
       setlstate("");
       setidcstate("");
-    } else if (location.pathname === "/home/nonlocal") {
+    } else if (location.pathname === "/home/nonlocal" || location.pathname === "home/nonlocalreg") {
       setnlstate("active");
       setlstate("");
       setidcstate("");
@@ -83,14 +82,13 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav nav-tabs me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink
-                className={`nav-link ${nlstate}`}
-                to="nonlocal"
-                role="button"
-                isActive={isActiveFunc}
-              >
-                Non-local Outing <ion-icon name="train-outline"></ion-icon>
-              </NavLink>
+              {
+                !getOutdate()?<NavLink className={`nav-link ${nlstate}`} to="/home/nonlocal" role="button" isActive={isActiveFunc}>
+                  Non-local Outing <ion-icon name="train-outline"></ion-icon>
+                  </NavLink>: <NavLink className={`nav-link ${nlstate}`} to="/home/nonlocalreg" role="button" isActive={isActiveFunc}>Non-local Outing <ion-icon name="train-outline"></ion-icon>
+                  </NavLink>
+              }
+              
             </li>
             <li className="nav-item">
               <NavLink
@@ -108,7 +106,7 @@ export default function Navbar(props) {
                 isActive={isActiveFunc}
                 role="button"
               >
-                ID Card <ion-icon name="id-card-outline"></ion-icon>
+                Mess Credits <ion-icon name="cash-outline"></ion-icon>
               </NavLink>
             </li>
           </ul>

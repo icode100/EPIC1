@@ -44,6 +44,7 @@ class userCred(models.Model):
     hosteller = models.BooleanField(default=True,null=False)
     blockName = models.CharField(max_length=15,default="")
     roomno = models.CharField(max_length=15,default="")
+    credits = models.IntegerField(null=True,default=32500)
     def __str__(self):
         return self.reg
 
@@ -91,12 +92,16 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 class LocalOuting(models.Model):
+    id = models.AutoField(primary_key=True)
     outdate = models.DateField(auto_now=True)
     outinstance = models.TimeField(auto_now=True)
     ininstance = models.TimeField(null=True,blank=True)
     stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     security_ispermitted = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.id)
 class NonLocalOuting(models.Model):
+    id = models.AutoField(primary_key=True)
     stu = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
     outinstance = models.DateTimeField()
     ininstance = models.DateTimeField(null=True,blank=True)
@@ -108,3 +113,5 @@ class NonLocalOuting(models.Model):
     modeoft = models.CharField(max_length=20,default="")
     security_ispermitted = models.BooleanField(default=False)
     warden_ispermitted = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.id)

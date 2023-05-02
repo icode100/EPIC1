@@ -18,5 +18,19 @@ const removeToken = ()=>{
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
 }
+const storeOutdate = (value)=>{
+    if(value){
+        const outdate = value;
+        console.log(outdate)
+        localStorage.setItem('outdate',outdate)
+    }
+}
+const getOutdate = ()=>{
+    let outdate = localStorage.getItem('outdate')
+    return outdate
+}
 
-export {storeToken,getToken,removeToken}
+const removeOutdate = ()=>{
+    localStorage.removeItem('outdate')
+}
+export {storeToken,getToken,removeToken,storeOutdate,getOutdate,removeOutdate}

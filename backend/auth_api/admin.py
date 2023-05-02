@@ -40,14 +40,14 @@ class UserModelAdmin(BaseUserAdmin):
     filter_horizontal = ()
     form = CustomUserForm
 class userModelCred(admin.ModelAdmin):
-    list_display = ('reg','dob','course','branch','sem','hosteller','blockName','roomno')
+    list_display = ('reg','dob','course','branch','sem','hosteller','blockName','roomno','credits')
     ordering = ('reg',)
 
 class LocalOutingModelAdmin(admin.ModelAdmin):
-    list_display = ('stu','outdate','outinstance','ininstance','security_ispermitted')
+    list_display = ('id','stu','outdate','outinstance','ininstance','security_ispermitted')
     form  = CustomLocalOutingForm
 class NonLocalOutingModelAdmin(admin.ModelAdmin):
-    list_display = ('stu','outinstance','ininstance','reason','zip','security_ispermitted','warden_ispermitted')
+    list_display = ('id','stu','outinstance','ininstance','reason','zip','security_ispermitted','warden_ispermitted')
     form = CustomNonLocalOutingForm
 admin.site.register(User, UserModelAdmin)
 admin.site.register(userCred,userModelCred)

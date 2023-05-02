@@ -1,101 +1,101 @@
 {
     "client": "Thunder Client",
     "collectionName": "djangouserreg",
-    "dateExported": "2023-03-19T07:59:30.956Z",
+    "dateExported": "2023-05-01T17:31:26.136Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "0ae1e091-3835-44b2-9c60-60fe0e5a5553",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "2dda5220-4fb5-4adc-80d8-a7e14dff9db3",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "firstcheck",
             "url": "http://127.0.0.1:8000/register/",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-03-17T15:11:00.112Z",
-            "modified": "2023-03-17T15:43:25.710Z",
+            "created": "2023-03-21T14:49:57.908Z",
+            "modified": "2023-03-24T17:53:00.711Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\",\n  \"name\":\"Ipsit Das\",\n  \"password\":\"Ipsitdas@01\",\n  \"password2\":\"Ipsitdas@01\"\n}",
+                "raw": "{\n  \"email\": \"421141@student.nitandhra.ac.in\",\n  \"name\": \"vishal gokul\",\n  \"password\": \"vishal123\",\n  \"password2\": \"vishal123\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "50aa5f79-c85d-4e53-aeef-902e21c5f2e1",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "31943678-99f9-49cb-be77-86f8eb2f935d",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "logincheck",
             "url": "http://127.0.0.1:8000/login/",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2023-03-18T06:34:20.860Z",
-            "modified": "2023-03-19T07:01:44.769Z",
+            "created": "2023-03-21T14:49:57.910Z",
+            "modified": "2023-05-01T15:37:02.742Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\",\n  \"password\":\"Ipsitdas@1\"\n}",
+                "raw": "{\n  \"email\":\"421150@student.nitandhra.ac.in\",\n  \"password\":\"ipsit123\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "8bc2bc0c-f97d-42c8-ad2f-ff18a1f597e8",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "d6a4fc7e-3955-44ae-9430-0a6dc181b115",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "profile",
             "url": "http://127.0.0.1:8000/profile/",
             "method": "GET",
             "sortNum": 30000,
-            "created": "2023-03-18T09:15:00.833Z",
-            "modified": "2023-03-18T09:20:51.039Z",
+            "created": "2023-03-21T14:49:57.911Z",
+            "modified": "2023-04-11T05:24:17.804Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MTMyMzg5LCJpYXQiOjE2NzkxMzExODksImp0aSI6IjdkZTY4YmQ4NWJlNDQ0M2NhZmE3ZGUyNjQ5OTYzYzgwIiwidXNlcl9pZCI6M30.oaxYt03oTtIh-j22YGaHgHwPT5LTVQ6r358BNTHVygk"
+                    "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMTkxODMyLCJpYXQiOjE2ODExOTA2MzIsImp0aSI6IjMyZWVjODA2YjllMzRiNWQ5OWZjN2FmMWU1MmZjYWFjIiwidXNlcl9pZCI6IjQyMTE1MCJ9.Z7XFfN8KdNDIU8h8ucXfeUsnjjF0vpaSzk_llpYJPcg"
                 }
             ],
             "params": [],
             "tests": []
         },
         {
-            "_id": "8ab6d7cc-76e7-4c00-a223-61c06491b47a",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "f357da6c-b914-4469-8a07-f822366533b4",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "changepassword",
             "url": "http://127.0.0.1:8000/changepassword/",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-03-18T10:12:26.252Z",
-            "modified": "2023-03-19T05:51:46.267Z",
+            "created": "2023-03-21T14:49:57.912Z",
+            "modified": "2023-04-29T16:52:55.897Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5MjA0NzMzLCJpYXQiOjE2NzkyMDM1MzMsImp0aSI6IjcxOTk0YmJhMzhkZTQ0MjI4NTk2MGQ0MmIwMDkyMWRlIiwidXNlcl9pZCI6M30.wlP8mkoOb2KLxZ8gj2uhviEitPBSePYW9XV9KdWOyc0"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyNzg3Nzk1LCJpYXQiOjE2ODI3ODY1OTUsImp0aSI6Ijg4YmViZmQ2ZTkyYzQzYzM5NWY3MjQ1ZjI2MjQ1OTYwIiwidXNlcl9pZCI6IjQyMTE1MCJ9.SBJ1aosh7rQm7CuZoyWe6T-GwrfoQKnYXL72wdRVAIE"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"password\":\"Ipsitdas@1\",\n  \"password2\":\"Ipsitdas@1\"\n}",
+                "raw": "{\n  \"password\":\"ipsit123\",\n  \"password2\":\"ipsit123\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "f9cbfbac-21b5-42fc-9ce7-5bb7c3e9d776",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "f26b84f2-92b5-4695-aefa-cd2d9712af60",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "sendresetpassword",
             "url": "http://127.0.0.1:8000/sendresetpassword/",
             "method": "POST",
             "sortNum": 50000,
-            "created": "2023-03-19T05:24:52.945Z",
-            "modified": "2023-03-19T06:54:45.208Z",
+            "created": "2023-03-21T14:49:57.913Z",
+            "modified": "2023-03-21T14:49:57.913Z",
             "headers": [],
             "params": [],
             "body": {
@@ -106,15 +106,15 @@
             "tests": []
         },
         {
-            "_id": "4e9516aa-723d-49f0-af6a-b757c8771803",
-            "colId": "572ce692-5a19-4eab-9c00-ac7ff9d425c5",
+            "_id": "99b0e41a-bc7d-4176-a7fe-2269111794fa",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
             "containerId": "",
             "name": "resetpass",
             "url": "http://127.0.0.1:8000/resetpassword/Mw/blb6h9-11d4768248ed8b5a4574b02a39c60fc6",
             "method": "POST",
             "sortNum": 60000,
-            "created": "2023-03-19T06:53:54.431Z",
-            "modified": "2023-03-19T06:58:05.741Z",
+            "created": "2023-03-21T14:49:57.914Z",
+            "modified": "2023-03-21T14:49:57.914Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -125,6 +125,54 @@
             "body": {
                 "type": "json",
                 "raw": "{\n  \"password\":\"Ipsitdas@1\",\n  \"password2\":\"Ipsitdas@1\"\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "89e34e44-f1dd-407c-be67-bc184ff80769",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
+            "containerId": "",
+            "name": "localouting",
+            "url": "http://localhost:8000/localouting",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-04-30T16:22:10.166Z",
+            "modified": "2023-05-01T11:33:59.989Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyOTQyMDE5LCJpYXQiOjE2ODI5NDA4MTksImp0aSI6IjU2YmFiMTFlOTcxYjRhNDNiMGI4YmU1YzFhNDVhZGM1IiwidXNlcl9pZCI6IjQyMTE0MSJ9.lgDv0fo8Xq6779QwOPyku0EI-NG6vsvi5jyepJI8Bb8"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n  \"stu\":\"421141\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3b3ca071-0dd1-40cc-804c-a092aa5a10fa",
+            "colId": "ecb09354-c08e-42c0-8420-733eefdd64a8",
+            "containerId": "",
+            "name": "nonlocalouting",
+            "url": "http://localhost:8000/nonlocalouting",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-05-01T10:26:33.913Z",
+            "modified": "2023-05-01T15:37:21.337Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgyOTU2NjIyLCJpYXQiOjE2ODI5NTU0MjIsImp0aSI6ImM0MzI1M2Q4NzFkMTQ0NzA4YWU5NjNmMjE3MDBkNTc1IiwidXNlcl9pZCI6IjQyMTE1MCJ9.yweuYKUimONm6wRUqcZLwW8f4Ll_iH-cHDu1ff8vv9w"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"stu\":\"421150\",\n  \"outinstance\":\"2023-05-01 05:10:15.755887\",\n  \"address\":\"bhubaneswar,odisha,india\",\n  \"reason\":\"visiting home\",\n  \"city\":\"bhubaneswar\",\n  \"state\":\"odisha\",\n  \"zip\":12345,\n  \"modeoft\":\"train\"\n}",
                 "form": []
             },
             "tests": []

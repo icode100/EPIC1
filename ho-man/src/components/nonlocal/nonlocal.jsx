@@ -6,10 +6,14 @@ import { usePostNonLocalOutingFormMutation } from "../../services/userAuth";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import PublishSharpIcon from '@mui/icons-material/PublishSharp';
+import { storeOutdate,getOutdate } from "../../services/localStorageService";
+import { useDispatch } from "react-redux";
+import { setOutdate } from "../../features/outdateSlice";
 
 
-export default function Nonlocal(props) {
+export default function Nonlocal() {
   const {access_token} = getToken()
+  const dispatch = useDispatch();
   const {data,isSuccess} = useGetLoggedUserQuery(access_token);
   useEffect(() => {
     document.title = "ho-man | non-local outing";
@@ -83,7 +87,11 @@ export default function Nonlocal(props) {
       alert("Sorry! 😢 we cannot process your request now. Please contact the admin");
     }
     if(res.data){
-      navigate('/home');
+      storeOutdate(res.data.id.toString());
+      console.log(res.data.id);
+      let outdate = getOutdate();
+      dispatch(setOutdate({outdate:outdate}))
+      navigate('/home/nonlocalreg');
     }
 
   }
@@ -114,7 +122,7 @@ export default function Nonlocal(props) {
         </section>
       <form className="row" onSubmit={HandleSubmit}>
         <div className="col-md-12">
-          <label HTMLfor="inputAddress" className="form-label">
+          <label htmlFor="inputAddress" className="form-label">
             Address
           </label>
           <input
@@ -126,7 +134,7 @@ export default function Nonlocal(props) {
           />
         </div>
         <div className="col-12">
-          <label HTMLfor="reason" className="form-label">
+          <label htmlFor="reason" className="form-label">
             Reason for outing
           </label>
           <input
@@ -138,13 +146,13 @@ export default function Nonlocal(props) {
           />
         </div>
         <div className="col-md-6">
-          <label HTMLfor="inputCity" className="form-label">
+          <label htmlFor="inputCity" className="form-label">
             City
           </label>
           <input type="text" className="form-control" name="city" id="inputCity" />
         </div>
         <div className="col-md-4">
-          <label HTMLfor="inputState" className="form-label">
+          <label htmlFor="inputState" className="form-label">
             State
           </label>
           <select id="inputState" name="state" className="form-select">
@@ -157,25 +165,25 @@ export default function Nonlocal(props) {
           </select>
         </div>
         <div className="col-md-2">
-          <label HTMLfor="inputZip" className="form-label">
+          <label htmlFor="inputZip" className="form-label">
             Zip
           </label>
           <input type="text" className="form-control" name="zip" id="inputZip" />
         </div>
         <div className="col-md-2">
-          <label HTMLfor="inputZip"  className="form-label">
+          <label htmlFor="inputZip"  className="form-label">
             mode of transport
           </label>
           <input type="text" name='modeoft' className="form-control" id="inputZip" />
         </div>
         <div className="col-md-2">
-          <label HTMLfor="outdate" className="form-label">
+          <label htmlFor="outdate" className="form-label">
             Outing date
           </label>
           <input type='datetime-local' value={outDate} onChange={handleOutDateChange} className="form-control" name="outdate" id="outdate" />
         </div>
         <div className="col-md-2">
-          <label HTMLfor="retdate" className="form-label">
+          <label htmlFor="retdate" className="form-label">
             Expected Return date
           </label>
           <input type='datetime-local' value={endDate} onChange={handleEndDateChange} className="form-control" id="retdate" />
@@ -200,7 +208,7 @@ export default function Nonlocal(props) {
               type="checkbox"
               id="gridCheck"
             />
-            <label className="form-check-label" HTMLfor="gridCheck">
+            <label className="form-check-label" htmlFor="gridCheck">
               I follow the guidelines
             </label>
           </div>

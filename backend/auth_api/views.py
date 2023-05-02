@@ -1,18 +1,21 @@
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status,generics
 from rest_framework.views import APIView
-from auth_api.serializers import (UserRegSerializer,
+from auth_api.serializers import (GetNonlocalPermissionsSerializer, MessRebateSerializer, NonLocalOutingReturnSerializer, UserRegSerializer,
                                   UserLoginSerializer,
                                   UserProfileSerializer,
                                   UserChangePasswordSerializer,
                                   SendPasswordResetEmailSerializer,
                                   UserPasswordResetSerializer,
                                   LocalOutingSerializer,
-                                  NonLocalOutingSerializer)
+                                  NonLocalOutingSerializer,
+                                  NonLocalOutingInstanceSerializer)
 from django.contrib.auth import authenticate
 from auth_api.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+
+from .models import NonLocalOuting,userCred
 
 
 # generating tokens
@@ -111,8 +114,37 @@ class LocalOutingView(APIView):
 class NonLocalOutingView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
-    def post(self,request,fromat=None):
+    def post(self,request,format=None):
         serializer = NonLocalOutingSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data,status = status.HTTP_201_CREATED)
+        record = serializer.save()
+        respose_data = {"id":record.id}
+        print(record)
+        return Response(respose_data,status = status.HTTP_201_CREATED)
+
+class GetNonlocalPermissionsView(APIView):
+    renderer_classes = [UserRenderer]
+    def get(self, request, id,format=None):
+        record = NonLocalOuting.objects.get(id=id)
+        serializer = GetNonlocalPermissionsSerializer(record)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class NonLocalOutingUpdateAPIView(generics.UpdateAPIView):
+    queryset = NonLocalOuting.objects.all()
+    serializer_class = NonLocalOutingReturnSerializer
+    lookup_field = 'id'
+
+class NonLocalOutingInstanceView(APIView):
+    renderer_classes = [UserRenderer]
+    def get(self,request,id,format=None):
+        record = NonLocalOuting.objects.get(id=id)
+        serializer = NonLocalOutingInstanceSerializer(record)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+class MessRebateView(APIView):
+    renderer_classes = [UserRenderer]
+    def put(self,request,reg,format=None):
+        record = userCred.objects.get(reg=reg)
+        record.credits -= request.data.get('credits')
+        record.save()
+        serializer = MessRebateSerializer(record)
+        return Response(serializer.data)

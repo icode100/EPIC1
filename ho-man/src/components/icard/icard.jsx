@@ -1,7 +1,11 @@
 import React from "react";
 import profpic from "../nonlocal/profpic.png";
 import jsPDF from "jspdf";
+import { getToken } from "../../services/localStorageService";
+import { useGetLoggedUserQuery } from "../../services/userAuth";
 export default function Icard(props) {
+  const { access_token } = getToken();
+  const { data, isSuccess } = useGetLoggedUserQuery(access_token);
   let generatepdf = ()=>{
     var doc = new jsPDF("p","pt",[305, 500]);
   
@@ -38,10 +42,12 @@ export default function Icard(props) {
               fontFamily: "monospace",
             }}
           >
-            Name:{props.name} <br />
-            Roll:{props.roll} <br />
-            Branch:{props.branch} <br />
-            Sem:{props.sem} <br />
+            Name:{isSuccess && data ? data.name : ""} <br />
+            Roll:{isSuccess && data ? data.id : ""} <br />
+            Sem:{isSuccess && data ? data.cred.sem : ""} <br />
+            Block:{isSuccess && data ? data.cred.blockName : ""} <br />
+            Room:{isSuccess && data ? data.cred.roomno : ""} <br />
+            Mess Credit: {isSuccess && data ? data.cred.credits : ""}
           </p>
         </div>
       </div>

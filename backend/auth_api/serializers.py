@@ -134,4 +134,20 @@ class LocalOutingSerializer(serializers.ModelSerializer):
 class NonLocalOutingSerializer(serializers.ModelSerializer):
     class Meta:
         model = NonLocalOuting
-        fields = ['stu','outinstance','address','reason','city','state','zip','modeoft']
+        fields = ['id','stu','outinstance','address','reason','city','state','zip','modeoft']
+class GetNonlocalPermissionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NonLocalOuting
+        fields = ['security_ispermitted','warden_ispermitted']
+class NonLocalOutingReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NonLocalOuting
+        fields = ['id', 'ininstance']
+class NonLocalOutingInstanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NonLocalOuting
+        fields = ['outinstance', 'ininstance']
+class MessRebateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = userCred
+        fields = ['reg','credits']
