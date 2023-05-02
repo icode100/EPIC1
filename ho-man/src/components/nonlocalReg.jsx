@@ -52,27 +52,6 @@ export default function NonlocalReg() {
     }
 
   const handleSubmit = async(event) => {
-    // event.preventDefault();
-    // axios
-    //   .put(`http://localhost:8000/nonlocaloutingreturn/${id}/update/`, instance)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    // axios
-    //   .put(`http://localhost:8000/messrebate/${data.cred.reg}/update/`,diffmoney)  
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    //   removeOutdate();
-    //   // console.log(id)
-    //   navigate('/home/nonlocal');
     event.preventDefault();
 
   const putRequest1 = axios.put(`http://localhost:8000/nonlocaloutingreturn/${id}/update/`, instance);
@@ -83,7 +62,7 @@ export default function NonlocalReg() {
       console.log(res[0].data); // response from first request
       console.log(res[1].data); // response from second request
       removeOutdate();
-      navigate('/home');
+      window.location.reload();
     })
     .catch((err) => {
       console.log(err);
