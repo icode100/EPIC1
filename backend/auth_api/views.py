@@ -9,13 +9,15 @@ from auth_api.serializers import (GetNonlocalPermissionsSerializer, MessRebateSe
                                   UserPasswordResetSerializer,
                                   LocalOutingSerializer,
                                   NonLocalOutingSerializer,
-                                  NonLocalOutingInstanceSerializer)
+                                  NonLocalOutingInstanceSerializer,
+                                  LocalPermissionSerializer,
+                                  LocaloutingReturnSerializer)
 from django.contrib.auth import authenticate
 from auth_api.renderers import UserRenderer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 
-from .models import NonLocalOuting,userCred
+from .models import NonLocalOuting,userCred,LocalOuting
 
 
 # generating tokens
@@ -147,4 +149,19 @@ class MessRebateView(APIView):
         record.credits -= request.data.get('credits')
         record.save()
         serializer = MessRebateSerializer(record)
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+class LocalPermissionView(APIView):
+    renderer_classes = [UserRenderer]
+    def get(self,request,id,format=None):
+        record = LocalOuting.objects.get(id=id)
+        serializer = LocalPermissionSerializer(record)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+class LocalReturnView(APIView):
+    renderer_classes = [UserRenderer]
+    def put(self,request,id,format=None):
+        record = LocalOuting.objects.get(id=id)
+        record.ininstance = request.data.get('ininstance')
+        record.save()
+        serializer = LocaloutingReturnSerializer(record)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+        

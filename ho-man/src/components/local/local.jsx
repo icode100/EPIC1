@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import profpic from "../nonlocal/profpic.png";
-import { getToken } from "../../services/localStorageService";
+import { getToken, storeLocalid } from "../../services/localStorageService";
 import { useGetLoggedUserQuery } from "../../services/userAuth";
 import { usePostLocalOutingFormMutation } from "../../services/userAuth";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,8 @@ export default function Local(props) {
         console.log(res)
       }
       if(res.data){
-        navigate('/home')
+        storeLocalid(res.data.id.toString())
+        navigate('/home/localreg')
       }
   }
 

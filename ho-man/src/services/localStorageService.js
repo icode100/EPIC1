@@ -33,4 +33,19 @@ const getOutdate = ()=>{
 const removeOutdate = ()=>{
     localStorage.removeItem('outdate')
 }
-export {storeToken,getToken,removeToken,storeOutdate,getOutdate,removeOutdate}
+const storeLocalid = (value)=>{
+    if(value){
+        const localid = value;
+        console.log(localid)
+        localStorage.setItem('localid',localid)
+    }
+}
+const getLocalid = ()=>{
+    let localid = localStorage.getItem('localid')
+    return localid
+}
+
+const removeLocalid = ()=>{
+    localStorage.removeItem('localid')
+}
+export {storeToken,getToken,removeToken,storeOutdate,getOutdate,removeOutdate,storeLocalid,getLocalid,removeLocalid}

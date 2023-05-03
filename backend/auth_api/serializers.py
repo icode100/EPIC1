@@ -130,7 +130,7 @@ class UserPasswordResetSerializer(serializers.Serializer):
 class LocalOutingSerializer(serializers.ModelSerializer):
     class Meta:
         model = LocalOuting
-        fields = ['ininstance','stu']
+        fields = ['ininstance','stu','id']
 class NonLocalOutingSerializer(serializers.ModelSerializer):
     class Meta:
         model = NonLocalOuting
@@ -138,7 +138,7 @@ class NonLocalOutingSerializer(serializers.ModelSerializer):
 class GetNonlocalPermissionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = NonLocalOuting
-        fields = ['security_ispermitted','warden_ispermitted']
+        fields = ['security_ispermitted','warden_ispermitted','return_ispermitted']
 class NonLocalOutingReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = NonLocalOuting
@@ -151,3 +151,12 @@ class MessRebateSerializer(serializers.ModelSerializer):
     class Meta:
         model = userCred
         fields = ['reg','credits']
+class LocalPermissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalOuting
+        fields = ['security_ispermitted']
+class LocaloutingReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalOuting
+        fields = ['id','ininstance']
+    

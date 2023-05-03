@@ -113,5 +113,6 @@ class NonLocalOuting(models.Model):
     modeoft = models.CharField(max_length=20,default="")
     security_ispermitted = models.BooleanField(default=False)
     warden_ispermitted = models.BooleanField(default=False)
+    return_ispermitted = models.BooleanField(default=False)
     def __str__(self):
         return str(self.id)

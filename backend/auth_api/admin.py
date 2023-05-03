@@ -47,7 +47,7 @@ class LocalOutingModelAdmin(admin.ModelAdmin):
     list_display = ('id','stu','outdate','outinstance','ininstance','security_ispermitted')
     form  = CustomLocalOutingForm
 class NonLocalOutingModelAdmin(admin.ModelAdmin):
-    list_display = ('id','stu','outinstance','ininstance','reason','zip','security_ispermitted','warden_ispermitted')
+    list_display = ('id','stu','outinstance','ininstance','reason','zip','security_ispermitted','warden_ispermitted','return_ispermitted')
     form = CustomNonLocalOutingForm
 admin.site.register(User, UserModelAdmin)
 admin.site.register(userCred,userModelCred)

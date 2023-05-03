@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import profpic from "./nonlocal/profpic.png";
-import { getOutdate, getToken, removeOutdate } from "../services/localStorageService";
+import { getLocalid, getToken, removeLocalid } from "../services/localStorageService";
 import { useGetLoggedUserQuery } from "../services/userAuth";
 import axios from "axios";
 
 
 
-export default function NonlocalReg() {
+export default function LocalReg() {
   useEffect(() => {
-    document.title = "ho-man | Nonlocal outing";
+    document.title = "ho-man | local outing";
   }, []);
   const { access_token } = getToken();
   const { data, isSuccess } = useGetLoggedUserQuery(access_token);
-  const idc = getOutdate();
+  const idc = getLocalid();
   var id = idc
   const [perm, setPerm] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/nonlocalpermissions/${id}/`)
+      .get(`http://localhost:8000/localpermission/${id}/`)
       .then((response) => {
         setPerm(response.data);
       })
@@ -27,52 +27,23 @@ export default function NonlocalReg() {
   }, [id]);
 
   const instance = {
-    ininstance: new Date().toISOString().slice(0, 19).replace("T", " "),
+    ininstance: new Date().toLocaleTimeString(),
   };
-  const [timeinstance,setTimeinstance] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/nonlocalinstance/${id}/`)
-      .then((response) => {
-        setTimeinstance(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [id]);
-    
-    const outDate = new Date(timeinstance.outinstance);
-    const inDate = new Date(instance.ininstance);
-    const durationInDays = (inDate - outDate) / 1000 / 60 / 60 / 24;
-    const datediff =  Math.floor(durationInDays);
-    // console.log(inDate)
-    console.log(outDate,datediff)
-    const diffmoney = 
-    {
-      credits: datediff*114
-    }
-
+  
   const handleSubmit = async(event) => {
     event.preventDefault();
-    if(perm.return_ispermitted){
-      const putRequest1 = axios.put(`http://localhost:8000/nonlocaloutingreturn/${id}/update/`, instance);
-      const putRequest2 = axios.put(`http://localhost:8000/messrebate/${data.cred.reg}/update/`,diffmoney);
-    
-      Promise.all([putRequest1, putRequest2])
-        .then((res) => {
-          console.log(res[0].data); // response from first request
-          console.log(res[1].data); // response from second request
-          removeOutdate();
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    else{
-      alert('Please get permitted by security')
-    }
-  
+
+  const putRequest1 = axios.put(`http://localhost:8000/localreturn/${id}/update/`, instance);
+
+  Promise.all([putRequest1])
+    .then((res) => {
+      console.log(res[0].data); // response from first request
+      removeLocalid();
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
   console.log(id)
   // console.log(perm)
@@ -101,8 +72,8 @@ export default function NonlocalReg() {
               Block:{isSuccess && data ? data.cred.blockName : ""} <br />
               Room:{isSuccess && data ? data.cred.roomno : ""} <br />
             </p>
-            {perm.security_ispermitted === false &&
-            perm.warden_ispermitted === false ? (
+            {perm.security_ispermitted === false ?
+            (
               <button type="submit" className="btn btn-danger" disabled>
                 not permitted yet
               </button>
