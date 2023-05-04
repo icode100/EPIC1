@@ -1,6 +1,5 @@
 import "./App.css";
 import Login from "./components/loginpage/login";
-import Register from "./components/loginpage/register";
 import Home from "./components/Home";
 import Error from "./error";
 import {
@@ -33,7 +32,6 @@ function App() {
   <BrowserRouter>
     <Routes>
       <Route path='/' element={!access_token?<Login/>:<Navigate to = '/home'/>}></Route>
-      <Route path= "/register" element= {<Register/>}errorElement= {<Error/>}></Route>
       <Route path= "/resetpass" element= {<ResetPass/>}errorElement= {<Error/>}></Route>
       <Route path='/home' element={access_token?<Home/>:<Navigate to="/"/>}>
         <Route path="nonlocalreg" element={<NonlocalReg/>} errorElement={<Error/>}/>

@@ -91,20 +91,6 @@ export default function Login(props) {
           {isLoading? <CircularProgress/>:<button className="btn btn-warning my-3" type="submit">
             <ion-icon name="log-in-outline"></ion-icon>
           </button>}
-          <p>
-            <a
-              id="forgot"
-              href="/resetpass"
-            >
-              forgot credentials 😢???
-            </a>
-            <a
-              id="register"
-              href="/register"
-            > <br />
-              Register here 😊
-            </a>
-          </p>
         </form>
         {server_error.non_field_errors?<Alert severity="error">{server_error.non_field_errors[0]}</Alert>:""}
       </div>
